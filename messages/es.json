@@ -1,7 +1,15 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from es!",
+	"page_title": "OpenAPI a TypeScript",
+	"page_description": "Generar tipos de TypeScript a partir de especificaciones OpenAPI.",
 	"open_api_spec": "Especificación OpenAPI",
 	"generate_ts": "Generar tipos de TypeScript",
-	"generated_code": "Código generado"
+	"generated_code": "Código generado",
+	"copy": "Copiar",
+	"copy_success": "Copiado al portapapeles",
+	"errors": {
+		"invalid_json": "JSON inválido",
+		"invalid_openapi": "Especificación OpenAPI inválida",
+		"no_spec": "No se proporcionó ninguna especificación OpenAPI"
+	}
 }
