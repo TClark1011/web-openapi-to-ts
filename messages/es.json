@@ -1,4 +1,7 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from es!"
+	"hello_world": "Hello, {name} from es!",
+	"open_api_spec": "Especificación OpenAPI",
+	"generate_ts": "Generar tipos de TypeScript",
+	"generated_code": "Código generado"
 }
