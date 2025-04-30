@@ -41,11 +41,11 @@
 		method="POST"
 		use:enhance={() => {
 			isLoading = true;
-			return ({ update }) => {
-				isLoading = false;
-				update({
+			return async ({ update }) => {
+				await update({
 					reset: false
 				});
+				isLoading = false;
 			};
 		}}
 	>
