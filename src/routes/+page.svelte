@@ -8,6 +8,8 @@
 	let resultElement: HTMLTextAreaElement | undefined = $state();
 	let copyButtonLabel = $state(m.copy());
 
+	let isLoading = $state(false);
+
 	const copyResultToClipboard = async () => {
 		if (!resultElement) return;
 
@@ -35,10 +37,12 @@
 
 <div class="flex w-screen flex-wrap justify-center gap-4 p-4">
 	<form
-		class="bg-base-200 flex max-w-xl min-w-lg shrink-0 flex-col p-4"
+		class="bg-base-200 flex max-w-xl min-w-lg shrink-0 flex-col p-4 pt-2"
 		method="POST"
 		use:enhance={() => {
+			isLoading = true;
 			return ({ update }) => {
+				isLoading = false;
 				update({
 					reset: false
 				});
@@ -47,15 +51,17 @@
 	>
 		<fieldset class="fieldset">
 			<legend class="fieldset-legend">{m.open_api_spec()}</legend>
-			<textarea rows="20" class="textarea w-full resize-none rounded-md font-mono" name="spec"
-			></textarea>
+			<textarea rows="20" class="textarea w-full resize-none" name="spec"></textarea>
 		</fieldset>
 
-		<button class="btn btn-primary" type="submit">
+		<button disabled={isLoading} class="btn btn-primary btn-loading" type="submit">
+			{#if isLoading}
+				<span class="loading loading-dots"></span>
+			{/if}
 			{m.generate_ts()}
 		</button>
 	</form>
-	<div class="bg-base-200 mt-0 max-w-xl min-w-lg shrink-0 p-4">
+	<div class="bg-base-200 mt-0 max-w-xl min-w-lg shrink-0 p-4 pt-2">
 		<fieldset class="fieldset">
 			<legend class="fieldset-legend">{m.generated_code()}</legend>
 			<textarea
@@ -63,10 +69,14 @@
 				rows="20"
 				value={form?.typescriptCode ?? ''}
 				readonly
-				class="textarea w-full resize-none font-mono"
+				class="textarea w-full resize-none"
 			></textarea>
 		</fieldset>
-		<button class="btn btn-secondary w-full" onclick={copyResultToClipboard}>
+		<button
+			disabled={!form?.success}
+			class="btn btn-primary w-full"
+			onclick={copyResultToClipboard}
+		>
 			{copyButtonLabel}
 		</button>
 	</div>
